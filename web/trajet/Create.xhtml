@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition>
+
+            <p:dialog id="TrajetCreateDlg" widgetVar="TrajetCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTrajetTitle}">
+                <h:form id="TrajetCreateForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{trajetController.selected != null}">
+                            <p:outputLabel value="#{bundle.CreateTrajetLabel_id}" for="id" />
+                            <p:inputText id="id" value="#{trajetController.selected.id}" title="#{bundle.CreateTrajetTitle_id}" />
+                            <p:outputLabel value="#{bundle.CreateTrajetLabel_annonce}" for="annonce" />
+                            <p:selectOneMenu id="annonce" value="#{trajetController.selected.annonce}" >
+                                <f:selectItems value="#{annonceController.itemsAvailableSelectOne}"
+                                               var="annonceItem"
+                                               itemValue="#{annonceItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateTrajetLabel_villeDepart}" for="villeDepart" />
+                            <p:selectOneMenu id="villeDepart" value="#{trajetController.selected.villeDepart}" >
+                                <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                               var="villeDepartItem"
+                                               itemValue="#{villeDepartItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateTrajetLabel_villeFin}" for="villeFin" />
+                            <p:selectOneMenu id="villeFin" value="#{trajetController.selected.villeFin}" >
+                                <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                               var="villeFinItem"
+                                               itemValue="#{villeFinItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateTrajetLabel_prix}" for="prix" />
+                            <p:inputText id="prix" value="#{trajetController.selected.prix}" title="#{bundle.CreateTrajetTitle_prix}" />
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{trajetController.create}" value="#{bundle.Save}" update="display,:TrajetListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrajetCreateDialog');"/>
+                        <p:commandButton value="#{bundle.Cancel}" onclick="TrajetCreateDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+        </ui:composition>
+    </body>
+</html>

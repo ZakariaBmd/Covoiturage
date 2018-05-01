@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrajetReponseCreateDlg" widgetVar="TrajetReponseCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTrajetReponseTitle}">
+            <h:form id="TrajetReponseCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trajetReponseController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTrajetReponseLabel_villeDebit}" for="villeDebit" />
+                        <p:selectOneMenu id="villeDebit" value="#{trajetReponseController.selected.villeDebit}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeDebitItem"
+                                           itemValue="#{villeDebitItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrajetReponseLabel_vileFin}" for="vileFin" />
+                        <p:selectOneMenu id="vileFin" value="#{trajetReponseController.selected.vileFin}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="vileFinItem"
+                                           itemValue="#{vileFinItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrajetReponseLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{trajetReponseController.selected.prix}" title="#{bundle.CreateTrajetReponseTitle_prix}" />
+                        <p:outputLabel value="#{bundle.CreateTrajetReponseLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{trajetReponseController.selected.etat}" title="#{bundle.CreateTrajetReponseTitle_etat}" />
+                        <p:outputLabel value="#{bundle.CreateTrajetReponseLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{trajetReponseController.selected.id}" title="#{bundle.CreateTrajetReponseTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{trajetReponseController.create}" value="#{bundle.Save}" update="display,:TrajetReponseListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrajetReponseCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TrajetReponseCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReponseAnnonceCreateDlg" widgetVar="ReponseAnnonceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReponseAnnonceTitle}">
+            <h:form id="ReponseAnnonceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reponseAnnonceController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReponseAnnonceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{reponseAnnonceController.selected.id}" title="#{bundle.CreateReponseAnnonceTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateReponseAnnonceLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{reponseAnnonceController.selected.user}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateReponseAnnonceLabel_date}" for="date" />
+                        <p:inputText id="date" value="#{reponseAnnonceController.selected.date}" title="#{bundle.CreateReponseAnnonceTitle_date}" />
+                        <p:outputLabel value="#{bundle.CreateReponseAnnonceLabel_dateReponce}" for="dateReponce" />
+                        <p:calendar id="dateReponce" pattern="MM/dd/yyyy HH:mm:ss" value="#{reponseAnnonceController.selected.dateReponce}" title="#{bundle.EditReponseAnnonceTitle_dateReponce}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reponseAnnonceController.create}" value="#{bundle.Save}" update="display,:ReponseAnnonceListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReponseAnnonceCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReponseAnnonceCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AnnonceViewDlg" widgetVar="AnnonceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAnnonceTitle}">
+            <h:form id="AnnonceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{annonceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAnnonceLabel_id}"/>
+                        <h:outputText value="#{annonceController.selected.id}" title="#{bundle.ViewAnnonceTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAnnonceLabel_villeDepart}"/>
+                        <h:outputText value="#{annonceController.selected.villeDepart}" title="#{bundle.ViewAnnonceTitle_villeDepart}"/>
+                        <h:outputText value="#{bundle.ViewAnnonceLabel_villeArrive}"/>
+                        <h:outputText value="#{annonceController.selected.villeArrive}" title="#{bundle.ViewAnnonceTitle_villeArrive}"/>
+                        <h:outputText value="#{bundle.ViewAnnonceLabel_dateAnnonce}"/>
+                        <h:outputText value="#{annonceController.selected.dateAnnonce}" title="#{bundle.ViewAnnonceTitle_dateAnnonce}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewAnnonceLabel_user}"/>
+                        <h:outputText value="#{annonceController.selected.user}" title="#{bundle.ViewAnnonceTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewAnnonceLabel_description}"/>
+                        <h:outputText value="#{annonceController.selected.description}" title="#{bundle.ViewAnnonceTitle_description}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AnnonceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

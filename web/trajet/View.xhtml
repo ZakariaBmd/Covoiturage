@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrajetViewDlg" widgetVar="TrajetViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrajetTitle}">
+            <h:form id="TrajetViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trajetController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTrajetLabel_id}"/>
+                        <h:outputText value="#{trajetController.selected.id}" title="#{bundle.ViewTrajetTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewTrajetLabel_annonce}"/>
+                        <h:outputText value="#{trajetController.selected.annonce}" title="#{bundle.ViewTrajetTitle_annonce}"/>
+                        <h:outputText value="#{bundle.ViewTrajetLabel_villeDepart}"/>
+                        <h:outputText value="#{trajetController.selected.villeDepart}" title="#{bundle.ViewTrajetTitle_villeDepart}"/>
+                        <h:outputText value="#{bundle.ViewTrajetLabel_villeFin}"/>
+                        <h:outputText value="#{trajetController.selected.villeFin}" title="#{bundle.ViewTrajetTitle_villeFin}"/>
+                        <h:outputText value="#{bundle.ViewTrajetLabel_prix}"/>
+                        <h:outputText value="#{trajetController.selected.prix}" title="#{bundle.ViewTrajetTitle_prix}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TrajetViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

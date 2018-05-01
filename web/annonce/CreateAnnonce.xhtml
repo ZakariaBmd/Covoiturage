@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAnnonceTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            
+            <h:form id="AnnonceCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{annonceController.selected != null}">
+                          <p:outputLabel value="#{bundle.CreateAnnonceLabel_villeDepart}" for="villeDepart" />
+                        <p:selectOneMenu id="villeDepart" value="#{annonceController.selected.villeDepart}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeDepartItem"
+                                           itemValue="#{villeDepartItem}" itemLabel="#{villeDepartItem.nom}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAnnonceLabel_villeArrive}" for="villeArrive" />
+                        <p:selectOneMenu id="villeArrive" value="#{annonceController.selected.villeArrive}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeArriveItem"
+                                           itemValue="#{villeArriveItem}" itemLabel="#{villeArriveItem.nom}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAnnonceLabel_dateAnnonce}" for="dateAnnonce" />
+                        <p:calendar id="dateAnnonce" pattern="MM/dd/yyyy HH:mm:ss" value="#{annonceController.selected.dateAnnonce}" title="#{bundle.EditAnnonceTitle_dateAnnonce}"  showOn="button"/>
+                        <p:outputLabel value
+                                       ="#{bundle.CreateAnnonceLabel_user}" for="user" />
+                        <p:selectOneMenu id="user" value="#{annonceController.selected.user}" >
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userItem"
+                                           itemValue="#{userItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAnnonceLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{annonceController.selected.description}" title="#{bundle.CreateAnnonceTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{annonceController.create}" value="#{bundle.Save}" />
+                </h:panelGroup>
+            </h:form>
+            
+            <h:form id="TrajetCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{bundle.CreateTrajetLabel_villeDepart}" for="villeDepart" />
+                        <p:selectOneMenu id="villeDepart" value="#{annonceController.trajet.villeDepart}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeDepartItem"
+                                           itemValue="#{villeDepartItem}" itemLabel="#{villeDepartItem.nom}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrajetLabel_villeFin}" for="villeFin" />
+                        <p:selectOneMenu id="villeFin" value="#{annonceController.trajet.villeFin}" >
+                            <f:selectItems value="#{villeController.itemsAvailableSelectOne}"
+                                           var="villeFinItem"
+                                           itemValue="#{villeFinItem}" itemLabel="#{villeFinItem.nom}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTrajetLabel_prix}" for="prix" />
+                        <p:inputText id="prix" value="#{annonceController.trajet.prix}" title="#{bundle.CreateTrajetTitle_prix}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{annonceController.addTrajet()}" value="#{bundle.Save}" update=":TrajetListForm:datalist" />
+                </h:panelGroup>
+            </h:form>
+
+            <h:form id="TrajetListForm">
+                <p:panel header="#{bundle.ListTrajetTitle}">
+                    <p:dataTable id="datalist" value="#{annonceController.trajets}" var="item"
+                                 selectionMode="single" selection="#{trajetController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.villeDepart.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrajetTitle_villeDepart}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.villeDepart.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrajetTitle_villeFin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.villeFin.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrajetTitle_prix}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prix}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>   
+
+
+</html>
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrajetReponseViewDlg" widgetVar="TrajetReponseViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTrajetReponseTitle}">
+            <h:form id="TrajetReponseViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{trajetReponseController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTrajetReponseLabel_villeDebit}"/>
+                        <h:outputText value="#{trajetReponseController.selected.villeDebit}" title="#{bundle.ViewTrajetReponseTitle_villeDebit}"/>
+                        <h:outputText value="#{bundle.ViewTrajetReponseLabel_vileFin}"/>
+                        <h:outputText value="#{trajetReponseController.selected.vileFin}" title="#{bundle.ViewTrajetReponseTitle_vileFin}"/>
+                        <h:outputText value="#{bundle.ViewTrajetReponseLabel_prix}"/>
+                        <h:outputText value="#{trajetReponseController.selected.prix}" title="#{bundle.ViewTrajetReponseTitle_prix}"/>
+                        <h:outputText value="#{bundle.ViewTrajetReponseLabel_etat}"/>
+                        <h:outputText value="#{trajetReponseController.selected.etat}" title="#{bundle.ViewTrajetReponseTitle_etat}"/>
+                        <h:outputText value="#{bundle.ViewTrajetReponseLabel_id}"/>
+                        <h:outputText value="#{trajetReponseController.selected.id}" title="#{bundle.ViewTrajetReponseTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TrajetReponseViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
